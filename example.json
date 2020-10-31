@@ -1,0 +1,8 @@
+{
+  "values": "Hello",
+  "target_language": "id",
+  "format_": "text",
+  "source_language": "en",
+  "customization_ids": {},
+  "model": "base"
+}
