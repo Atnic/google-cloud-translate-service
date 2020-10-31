@@ -9,7 +9,7 @@ Serverless service for handling translation using Google Translate API.
 #### Local Installation
 
 ```
-git clone https://github.com/cybermatrixco/google-cloud-translate-service.git
+git clone https://github.com/atnic/google-cloud-translate-service.git
 cd google-cloud-translate-service
 python -m venv env
 source env/bin/activate
