@@ -1,0 +1,29 @@
+name: Deploy Main
+
+on: 
+  push:
+    branches: 
+      - main
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - run: npm install
+    - name: Generate Google Cloud keyfile.json
+      run: echo $GOOGLE_APPLICATION_CREDENTIALS_JSON > $GITHUB_WORKSPACE/.gcloud/keyfile.json
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS_JSON: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS_JSON }}
+    - name: serverless deploy
+      uses: vlaaaaaaad/github-action@python-too
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: ${{ secrets.AWS_REGION }}
+        REGION: ${{ secrets.AWS_REGION }}
+        GOOGLE_APPLICATION_CREDENTIALS: ${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}
+        DB_TRANSLATIONS: ${{ secrets.DB_TRANSLATIONS }}
+      with:
+        args: deploy --stage prod
